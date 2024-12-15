@@ -4,6 +4,7 @@
 #include "ISOBMFF/HDLR.hpp"
 #include "ISOBMFF/MVHD.hpp"
 #include "ISOBMFF/Parser.hpp"
+#include "ISOBMFF/STSC.hpp"
 #include "ISOBMFF/TKHD.hpp"
 
 static void processMinf(ISOBMFF::Container *minf)
@@ -22,14 +23,22 @@ static void processMinf(ISOBMFF::Container *minf)
         }
         else
         {
-            std::shared_ptr<ISOBMFF::Box> stsc = stbl->GetBox("stsc");
+            std::shared_ptr<ISOBMFF::STSC> stsc = stbl->GetTypedBox<ISOBMFF::STSC>("stsc");
             if (!stsc)
             {
                 std::cerr << "stsc not accessible\n";
             }
             else
             {
-                std::cout << "stsc " << stsc->GetName() << "\n";
+                size_t entryCount = stsc->GetEntryCount();
+                std::cout << "stsc entry count  : " << entryCount << "\n";
+                for (size_t i = 0; i < stsc->GetEntryCount(); i++)
+                {
+                    ISOBMFF::SampleToChunk sampleToChunk = stsc->GetSampleToChunk(i);
+                    std::cout << "idx  : " << i << " sampleToChunk.firstChunk : " << sampleToChunk.firstChunk
+                              << " sampleToChunk.samplesPerChunk : " << sampleToChunk.samplesPerChunk
+                              << " sampleToChunk.sampleDescriptionId : " << sampleToChunk.sampleDescriptionId << "\n";
+                }
                 // TODO
             }
         }

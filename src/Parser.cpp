@@ -66,6 +66,7 @@
 #include <STSD.hpp>
 #include <STSS.hpp>
 #include <STTS.hpp>
+#include <STSC.hpp>
 #include <THMB.hpp>
 #include <TKHD.hpp>
 #include <URL.hpp>
@@ -409,6 +410,9 @@ void Parser::IMPL::RegisterDefaultBoxes() {
   });
   this->RegisterBox("mp4a", [=]() -> std::shared_ptr<Box> {
     return std::make_shared<MP4A>();
+  });
+  this->RegisterBox("stsc", [=]() -> std::shared_ptr<Box> {
+    return std::make_shared<STSC>();
   });
 }
 }  // namespace ISOBMFF
