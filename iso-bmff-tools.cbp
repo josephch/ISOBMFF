@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="iso-bmff-tools" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ISOBMFF" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="ISOBMFF/include" />
+		</Compiler>
+		<Unit filename="Apps/Tools.cpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/AVC1.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/AVCC.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/BinaryDataStream.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/BinaryFileStream.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/BinaryStream.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/Box.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/CDSC.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/COLR.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/Casts.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/Container.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/ContainerBox.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/DIMG.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/DREF.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/DisplayableObject.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/DisplayableObjectContainer.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/FRMA.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/FTYP.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/File.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/FullBox.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/HDLR.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/HVC1.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/HVCC.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/IINF.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/ILOC.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/INFE.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/IPCO.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/IPMA.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/IREF.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/IROT.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/ISPE.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/ImageGrid.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/MDHD.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/META.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/MVHD.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/Macros.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/Matrix.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/PITM.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/PIXI.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/Parser.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/SCHM.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/STSC.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/STSD.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/STSS.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/STTS.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/SingleItemTypeReferenceBox.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/THMB.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/TKHD.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/URL.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/URN.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/Utils.hpp" />
+		<Unit filename="ISOBMFF/include/ISOBMFF/WIN32.hpp" />
+		<Unit filename="ISOBMFF/source/AVC1.cpp" />
+		<Unit filename="ISOBMFF/source/AVCC-NALUnit.cpp" />
+		<Unit filename="ISOBMFF/source/AVCC.cpp" />
+		<Unit filename="ISOBMFF/source/BinaryDataStream.cpp" />
+		<Unit filename="ISOBMFF/source/BinaryFileStream.cpp" />
+		<Unit filename="ISOBMFF/source/BinaryStream.cpp" />
+		<Unit filename="ISOBMFF/source/Box.cpp" />
+		<Unit filename="ISOBMFF/source/CDSC.cpp" />
+		<Unit filename="ISOBMFF/source/COLR.cpp" />
+		<Unit filename="ISOBMFF/source/Container.cpp" />
+		<Unit filename="ISOBMFF/source/ContainerBox.cpp" />
+		<Unit filename="ISOBMFF/source/DIMG.cpp" />
+		<Unit filename="ISOBMFF/source/DREF.cpp" />
+		<Unit filename="ISOBMFF/source/DisplayableObject.cpp" />
+		<Unit filename="ISOBMFF/source/DisplayableObjectContainer.cpp" />
+		<Unit filename="ISOBMFF/source/FRMA.cpp" />
+		<Unit filename="ISOBMFF/source/FTYP.cpp" />
+		<Unit filename="ISOBMFF/source/File.cpp" />
+		<Unit filename="ISOBMFF/source/FullBox.cpp" />
+		<Unit filename="ISOBMFF/source/HDLR.cpp" />
+		<Unit filename="ISOBMFF/source/HVC1.cpp" />
+		<Unit filename="ISOBMFF/source/HVCC-Array-NALUnit.cpp" />
+		<Unit filename="ISOBMFF/source/HVCC-Array.cpp" />
+		<Unit filename="ISOBMFF/source/HVCC.cpp" />
+		<Unit filename="ISOBMFF/source/IINF.cpp" />
+		<Unit filename="ISOBMFF/source/ILOC-Item-Extent.cpp" />
+		<Unit filename="ISOBMFF/source/ILOC-Item.cpp" />
+		<Unit filename="ISOBMFF/source/ILOC.cpp" />
+		<Unit filename="ISOBMFF/source/INFE.cpp" />
+		<Unit filename="ISOBMFF/source/IPCO.cpp" />
+		<Unit filename="ISOBMFF/source/IPMA-Entry-Association.cpp" />
+		<Unit filename="ISOBMFF/source/IPMA-Entry.cpp" />
+		<Unit filename="ISOBMFF/source/IPMA.cpp" />
+		<Unit filename="ISOBMFF/source/IREF.cpp" />
+		<Unit filename="ISOBMFF/source/IROT.cpp" />
+		<Unit filename="ISOBMFF/source/ISPE.cpp" />
+		<Unit filename="ISOBMFF/source/ImageGrid.cpp" />
+		<Unit filename="ISOBMFF/source/MDHD.cpp" />
+		<Unit filename="ISOBMFF/source/META.cpp" />
+		<Unit filename="ISOBMFF/source/MVHD.cpp" />
+		<Unit filename="ISOBMFF/source/Matrix.cpp" />
+		<Unit filename="ISOBMFF/source/PITM.cpp" />
+		<Unit filename="ISOBMFF/source/PIXI-Channel.cpp" />
+		<Unit filename="ISOBMFF/source/PIXI.cpp" />
+		<Unit filename="ISOBMFF/source/Parser.cpp" />
+		<Unit filename="ISOBMFF/source/SCHM.cpp" />
+		<Unit filename="ISOBMFF/source/STSC.cpp" />
+		<Unit filename="ISOBMFF/source/STSD.cpp" />
+		<Unit filename="ISOBMFF/source/STSS.cpp" />
+		<Unit filename="ISOBMFF/source/STTS.cpp" />
+		<Unit filename="ISOBMFF/source/SingleItemTypeReferenceBox.cpp" />
+		<Unit filename="ISOBMFF/source/THMB.cpp" />
+		<Unit filename="ISOBMFF/source/TKHD.cpp" />
+		<Unit filename="ISOBMFF/source/URL.cpp" />
+		<Unit filename="ISOBMFF/source/URN.cpp" />
+		<Unit filename="ISOBMFF/source/Utils.cpp" />
+		<Unit filename="ISOBMFF/source/WIN32.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
