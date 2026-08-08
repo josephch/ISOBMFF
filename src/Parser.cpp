@@ -34,6 +34,7 @@
 #include <AVCC.hpp>
 #include <BinaryDataStream.hpp>
 #include <BinaryFileStream.hpp>
+#include <CO64.hpp>
 #include <CDSC.hpp>
 #include <COLR.hpp>
 #include <CTTS.hpp>
@@ -63,6 +64,7 @@
 #include <PIXI.hpp>
 #include <Parser.hpp>
 #include <SCHM.hpp>
+#include <STCO.hpp>
 #include <STSD.hpp>
 #include <STSS.hpp>
 #include <STTS.hpp>
@@ -413,6 +415,12 @@ void Parser::IMPL::RegisterDefaultBoxes() {
   });
   this->RegisterBox("stsc", [=]() -> std::shared_ptr<Box> {
     return std::make_shared<STSC>();
+  });
+  this->RegisterBox("stco", [=]() -> std::shared_ptr<Box> {
+    return std::make_shared<STCO>();
+  });
+  this->RegisterBox("co64", [=]() -> std::shared_ptr<Box> {
+    return std::make_shared<CO64>();
   });
 }
 }  // namespace ISOBMFF

@@ -28,6 +28,7 @@
 		<Unit filename="include/BinaryStream.hpp" />
 		<Unit filename="include/Box.hpp" />
 		<Unit filename="include/CDSC.hpp" />
+		<Unit filename="include/CO64.hpp" />
 		<Unit filename="include/COLR.hpp" />
 		<Unit filename="include/Casts.hpp" />
 		<Unit filename="include/Container.hpp" />
@@ -62,6 +63,7 @@
 		<Unit filename="include/PIXI.hpp" />
 		<Unit filename="include/Parser.hpp" />
 		<Unit filename="include/SCHM.hpp" />
+		<Unit filename="include/STCO.hpp" />
 		<Unit filename="include/STSC.hpp" />
 		<Unit filename="include/STSD.hpp" />
 		<Unit filename="include/STSS.hpp" />
@@ -83,6 +85,7 @@
 		<Unit filename="src/BinaryStream.cpp" />
 		<Unit filename="src/Box.cpp" />
 		<Unit filename="src/CDSC.cpp" />
+		<Unit filename="src/CO64.cpp" />
 		<Unit filename="src/COLR.cpp" />
 		<Unit filename="src/CTTS.cpp" />
 		<Unit filename="src/Container.cpp" />
@@ -125,6 +128,7 @@
 		<Unit filename="src/PIXI.cpp" />
 		<Unit filename="src/Parser.cpp" />
 		<Unit filename="src/SCHM.cpp" />
+		<Unit filename="src/STCO.cpp" />
 		<Unit filename="src/STSC.cpp" />
 		<Unit filename="src/STSD.cpp" />
 		<Unit filename="src/STSS.cpp" />
