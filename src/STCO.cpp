@@ -28,108 +28,87 @@
  * @author      Jean-David Gadina - www.digidna.net
  */
 
-#include <STCO.hpp>
 #include <Parser.hpp>
+#include <STCO.hpp>
 #include <cstdint>
 #include <cstring>
 
-namespace ISOBMFF
-{
-    class STCO::IMPL
-    {
-        public:
+namespace ISOBMFF {
+class STCO::IMPL {
+ public:
+  IMPL();
+  IMPL(const IMPL& o);
+  ~IMPL();
 
-            IMPL();
-            IMPL( const IMPL & o );
-            ~IMPL();
+  std::vector<uint32_t> _chunk_offset_table;
+};
 
-            std::vector< uint32_t > _chunk_offset_table;
-    };
+STCO::STCO() : FullBox("stco"), impl(std::make_unique<IMPL>()) {}
 
-    STCO::STCO():
-        FullBox( "stco" ),
-        impl( std::make_unique< IMPL >() )
-    {}
+STCO::STCO(const STCO& o)
+    : FullBox(o), impl(std::make_unique<IMPL>(*(o.impl))) {}
 
-    STCO::STCO( const STCO & o ):
-        FullBox( o ),
-        impl( std::make_unique< IMPL >( *( o.impl ) ) )
-    {}
-
-    STCO::STCO( STCO && o ) noexcept:
-        FullBox( std::move( o ) ),
-        impl( std::move( o.impl ) )
-    {
-        o.impl = nullptr;
-    }
-
-    STCO::~STCO()
-    {}
-
-    STCO & STCO::operator =( STCO o )
-    {
-        FullBox::operator=( o );
-        swap( *( this ), o );
-
-        return *( this );
-    }
-
-    void swap( STCO & o1, STCO & o2 )
-    {
-        using std::swap;
-
-        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
-        swap( o1.impl, o2.impl );
-    }
-
-    Error STCO::ReadData( Parser & parser, BinaryStream & stream )
-    {
-        FullBox::ReadData( parser, stream );
-
-        uint32_t entry_count;
-        Error err = stream.ReadBigEndianUInt32(entry_count);
-        if (err) return err;
-
-        for( uint32_t i = 0; i < entry_count; i++ )
-        {
-            uint32_t chunkOffset;
-            err = stream.ReadBigEndianUInt32(chunkOffset);
-            if (err) return err;
-            this->impl->_chunk_offset_table.emplace_back(chunkOffset);
-        }
-        return err;
-    }
-
-    std::vector< std::pair< std::string, std::string > > STCO::GetDisplayableProperties() const
-    {
-        auto props( FullBox::GetDisplayableProperties() );
-
-        for( unsigned int index = 0; index < this->GetEntryCount(); index++ )
-        {
-            props.push_back( { "Sample To Chunk",  std::to_string( this->GetChunkOffset(index) ) } );
-        }
-
-        return props;
-    }
-
-    size_t STCO::GetEntryCount() const
-    {
-        return this->impl->_chunk_offset_table.size();
-    }
-
-    uint32_t STCO::GetChunkOffset( size_t index ) const
-    {
-        return this->impl->_chunk_offset_table[ index ];
-    }
-
-    STCO::IMPL::IMPL()
-    {}
-
-    STCO::IMPL::IMPL( const IMPL & o )
-    {
-        this->_chunk_offset_table  = o._chunk_offset_table;
-    }
-
-    STCO::IMPL::~IMPL()
-    {}
+STCO::STCO(STCO&& o) noexcept : FullBox(std::move(o)), impl(std::move(o.impl)) {
+  o.impl = nullptr;
 }
+
+STCO::~STCO() {}
+
+STCO& STCO::operator=(STCO o) {
+  FullBox::operator=(o);
+  swap(*(this), o);
+
+  return *(this);
+}
+
+void swap(STCO& o1, STCO& o2) {
+  using std::swap;
+
+  swap(static_cast<FullBox&>(o1), static_cast<FullBox&>(o2));
+  swap(o1.impl, o2.impl);
+}
+
+Error STCO::ReadData(Parser& parser, BinaryStream& stream) {
+  FullBox::ReadData(parser, stream);
+
+  uint32_t entry_count;
+  Error err = stream.ReadBigEndianUInt32(entry_count);
+  if (err) return err;
+
+  for (uint32_t i = 0; i < entry_count; i++) {
+    uint32_t chunkOffset;
+    err = stream.ReadBigEndianUInt32(chunkOffset);
+    if (err) return err;
+    this->impl->_chunk_offset_table.emplace_back(chunkOffset);
+  }
+  return err;
+}
+
+std::vector<std::pair<std::string, std::string> >
+STCO::GetDisplayableProperties() const {
+  auto props(FullBox::GetDisplayableProperties());
+
+  for (unsigned int index = 0; index < this->GetEntryCount(); index++) {
+    props.push_back(
+        {"Sample To Chunk", std::to_string(this->GetChunkOffset(index))});
+  }
+
+  return props;
+}
+
+size_t STCO::GetEntryCount() const {
+  return this->impl->_chunk_offset_table.size();
+}
+
+uint32_t STCO::GetChunkOffset(size_t index) const {
+  return this->impl->_chunk_offset_table[index];
+}
+
+STCO::IMPL::IMPL() {}
+
+STCO::IMPL::IMPL(const IMPL& o) {
+  this->_chunk_offset_table = o._chunk_offset_table;
+}
+
+STCO::IMPL::~IMPL() {}
+}  // namespace ISOBMFF

@@ -28,113 +28,97 @@
  * @author      Jean-David Gadina - www.digidna.net
  */
 
-#include <STSC.hpp>
 #include <Parser.hpp>
+#include <STSC.hpp>
 #include <cstdint>
 #include <cstring>
 
-namespace ISOBMFF
-{
-    class STSC::IMPL
-    {
-        public:
+namespace ISOBMFF {
+class STSC::IMPL {
+ public:
+  IMPL();
+  IMPL(const IMPL& o);
+  ~IMPL();
 
-            IMPL();
-            IMPL( const IMPL & o );
-            ~IMPL();
+  std::vector<SampleToChunk> _sample_to_chunk_table;
+};
 
-            std::vector< SampleToChunk > _sample_to_chunk_table;
-    };
+STSC::STSC() : FullBox("stsc"), impl(std::make_unique<IMPL>()) {}
 
-    STSC::STSC():
-        FullBox( "stsc" ),
-        impl( std::make_unique< IMPL >() )
-    {}
+STSC::STSC(const STSC& o)
+    : FullBox(o), impl(std::make_unique<IMPL>(*(o.impl))) {}
 
-    STSC::STSC( const STSC & o ):
-        FullBox( o ),
-        impl( std::make_unique< IMPL >( *( o.impl ) ) )
-    {}
-
-    STSC::STSC( STSC && o ) noexcept:
-        FullBox( std::move( o ) ),
-        impl( std::move( o.impl ) )
-    {
-        o.impl = nullptr;
-    }
-
-    STSC::~STSC()
-    {}
-
-    STSC & STSC::operator =( STSC o )
-    {
-        FullBox::operator=( o );
-        swap( *( this ), o );
-
-        return *( this );
-    }
-
-    void swap( STSC & o1, STSC & o2 )
-    {
-        using std::swap;
-
-        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
-        swap( o1.impl, o2.impl );
-    }
-
-    Error STSC::ReadData( Parser & parser, BinaryStream & stream )
-    {
-        FullBox::ReadData( parser, stream );
-        uint32_t entry_count;
-
-        Error err = stream.ReadBigEndianUInt32(entry_count);
-        if (err) return err;
-
-        for( uint32_t i = 0; i < entry_count; i++ )
-        {
-
-            uint32_t firstChunk, samplesPerChunk, sampleDescriptionId;
-            err = stream.ReadBigEndianUInt32(firstChunk);
-            if (err) return err;
-            err = stream.ReadBigEndianUInt32(samplesPerChunk);
-            if (err) return err;
-            err = stream.ReadBigEndianUInt32(sampleDescriptionId);
-            if (err) return err;
-            this->impl->_sample_to_chunk_table.emplace_back(firstChunk, samplesPerChunk, sampleDescriptionId);
-        }
-        return err;
-    }
-
-    std::vector< std::pair< std::string, std::string > > STSC::GetDisplayableProperties() const
-    {
-        auto props( FullBox::GetDisplayableProperties() );
-
-        for( unsigned int index = 0; index < this->GetEntryCount(); index++ )
-        {
-            props.push_back( { "Sample To Chunk",  std::to_string( this->GetSampleToChunk(index).firstChunk )  + "." + std::to_string( this->GetSampleToChunk(index).samplesPerChunk) + "." + std::to_string( this->GetSampleToChunk(index).sampleDescriptionId ) } );
-        }
-
-        return props;
-    }
-
-    size_t STSC::GetEntryCount() const
-    {
-        return this->impl->_sample_to_chunk_table.size();
-    }
-
-    SampleToChunk STSC::GetSampleToChunk( size_t index ) const
-    {
-        return this->impl->_sample_to_chunk_table[ index ];
-    }
-
-    STSC::IMPL::IMPL()
-    {}
-
-    STSC::IMPL::IMPL( const IMPL & o )
-    {
-        this->_sample_to_chunk_table  = o._sample_to_chunk_table;
-    }
-
-    STSC::IMPL::~IMPL()
-    {}
+STSC::STSC(STSC&& o) noexcept : FullBox(std::move(o)), impl(std::move(o.impl)) {
+  o.impl = nullptr;
 }
+
+STSC::~STSC() {}
+
+STSC& STSC::operator=(STSC o) {
+  FullBox::operator=(o);
+  swap(*(this), o);
+
+  return *(this);
+}
+
+void swap(STSC& o1, STSC& o2) {
+  using std::swap;
+
+  swap(static_cast<FullBox&>(o1), static_cast<FullBox&>(o2));
+  swap(o1.impl, o2.impl);
+}
+
+Error STSC::ReadData(Parser& parser, BinaryStream& stream) {
+  FullBox::ReadData(parser, stream);
+  uint32_t entry_count;
+
+  Error err = stream.ReadBigEndianUInt32(entry_count);
+  if (err) return err;
+
+  for (uint32_t i = 0; i < entry_count; i++) {
+    uint32_t firstChunk, samplesPerChunk, sampleDescriptionId;
+    err = stream.ReadBigEndianUInt32(firstChunk);
+    if (err) return err;
+    err = stream.ReadBigEndianUInt32(samplesPerChunk);
+    if (err) return err;
+    err = stream.ReadBigEndianUInt32(sampleDescriptionId);
+    if (err) return err;
+    this->impl->_sample_to_chunk_table.emplace_back(firstChunk, samplesPerChunk,
+                                                    sampleDescriptionId);
+  }
+  return err;
+}
+
+std::vector<std::pair<std::string, std::string> >
+STSC::GetDisplayableProperties() const {
+  auto props(FullBox::GetDisplayableProperties());
+
+  for (unsigned int index = 0; index < this->GetEntryCount(); index++) {
+    props.push_back(
+        {"Sample To Chunk",
+         std::to_string(this->GetSampleToChunk(index).firstChunk) + "." +
+             std::to_string(this->GetSampleToChunk(index).samplesPerChunk) +
+             "." +
+             std::to_string(
+                 this->GetSampleToChunk(index).sampleDescriptionId)});
+  }
+
+  return props;
+}
+
+size_t STSC::GetEntryCount() const {
+  return this->impl->_sample_to_chunk_table.size();
+}
+
+SampleToChunk STSC::GetSampleToChunk(size_t index) const {
+  return this->impl->_sample_to_chunk_table[index];
+}
+
+STSC::IMPL::IMPL() {}
+
+STSC::IMPL::IMPL(const IMPL& o) {
+  this->_sample_to_chunk_table = o._sample_to_chunk_table;
+}
+
+STSC::IMPL::~IMPL() {}
+}  // namespace ISOBMFF

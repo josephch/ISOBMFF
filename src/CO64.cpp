@@ -33,103 +33,82 @@
 #include <cstdint>
 #include <cstring>
 
-namespace ISOBMFF
-{
-    class CO64::IMPL
-    {
-        public:
+namespace ISOBMFF {
+class CO64::IMPL {
+ public:
+  IMPL();
+  IMPL(const IMPL& o);
+  ~IMPL();
 
-            IMPL();
-            IMPL( const IMPL & o );
-            ~IMPL();
+  std::vector<uint64_t> _chunk_offset_table;
+};
 
-            std::vector< uint64_t > _chunk_offset_table;
-    };
+CO64::CO64() : FullBox("co64"), impl(std::make_unique<IMPL>()) {}
 
-    CO64::CO64():
-        FullBox( "co64" ),
-        impl( std::make_unique< IMPL >() )
-    {}
+CO64::CO64(const CO64& o)
+    : FullBox(o), impl(std::make_unique<IMPL>(*(o.impl))) {}
 
-    CO64::CO64( const CO64 & o ):
-        FullBox( o ),
-        impl( std::make_unique< IMPL >( *( o.impl ) ) )
-    {}
-
-    CO64::CO64( CO64 && o ) noexcept:
-        FullBox( std::move( o ) ),
-        impl( std::move( o.impl ) )
-    {
-        o.impl = nullptr;
-    }
-
-    CO64::~CO64()
-    {}
-
-    CO64 & CO64::operator =( CO64 o )
-    {
-        FullBox::operator=( o );
-        swap( *( this ), o );
-
-        return *( this );
-    }
-
-    void swap( CO64 & o1, CO64 & o2 )
-    {
-        using std::swap;
-
-        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
-        swap( o1.impl, o2.impl );
-    }
-
-    Error CO64::ReadData( Parser & parser, BinaryStream & stream )
-    {
-        FullBox::ReadData( parser, stream );
-
-        uint32_t entry_count;
-        Error err = stream.ReadBigEndianUInt32(entry_count);
-        if (err) return err;
-
-        for( uint32_t i = 0; i < entry_count; i++ )
-        {
-            uint64_t chunkOffset;
-            err = stream.ReadBigEndianUInt64(chunkOffset);
-            if (err) return err;
-            this->impl->_chunk_offset_table.emplace_back(chunkOffset);
-        }
-        return err;
-    }
-
-    std::vector< std::pair< std::string, std::string > > CO64::GetDisplayableProperties() const
-    {
-        auto props( FullBox::GetDisplayableProperties() );
-
-        for( unsigned int index = 0; index < this->GetEntryCount(); index++ )
-        {
-            props.push_back( { "Sample To Chunk",  std::to_string( this->GetChunkOffset(index) ) } );
-        }
-
-        return props;
-    }
-
-    size_t CO64::GetEntryCount() const
-    {
-        return this->impl->_chunk_offset_table.size();
-    }
-
-    uint64_t CO64::GetChunkOffset( size_t index ) const
-    {
-        return this->impl->_chunk_offset_table[ index ];
-    }
-
-    CO64::IMPL::IMPL()
-    {}
-
-    CO64::IMPL::IMPL( const IMPL & o )
-    {
-        this->_chunk_offset_table  = o._chunk_offset_table;
-    }
-
-    CO64::IMPL::~IMPL()
-    {}
+CO64::CO64(CO64&& o) noexcept : FullBox(std::move(o)), impl(std::move(o.impl)) {
+  o.impl = nullptr;
 }
+
+CO64::~CO64() {}
+
+CO64& CO64::operator=(CO64 o) {
+  FullBox::operator=(o);
+  swap(*(this), o);
+
+  return *(this);
+}
+
+void swap(CO64& o1, CO64& o2) {
+  using std::swap;
+
+  swap(static_cast<FullBox&>(o1), static_cast<FullBox&>(o2));
+  swap(o1.impl, o2.impl);
+}
+
+Error CO64::ReadData(Parser& parser, BinaryStream& stream) {
+  FullBox::ReadData(parser, stream);
+
+  uint32_t entry_count;
+  Error err = stream.ReadBigEndianUInt32(entry_count);
+  if (err) return err;
+
+  for (uint32_t i = 0; i < entry_count; i++) {
+    uint64_t chunkOffset;
+    err = stream.ReadBigEndianUInt64(chunkOffset);
+    if (err) return err;
+    this->impl->_chunk_offset_table.emplace_back(chunkOffset);
+  }
+  return err;
+}
+
+std::vector<std::pair<std::string, std::string> >
+CO64::GetDisplayableProperties() const {
+  auto props(FullBox::GetDisplayableProperties());
+
+  for (unsigned int index = 0; index < this->GetEntryCount(); index++) {
+    props.push_back(
+        {"Sample To Chunk", std::to_string(this->GetChunkOffset(index))});
+  }
+
+  return props;
+}
+
+size_t CO64::GetEntryCount() const {
+  return this->impl->_chunk_offset_table.size();
+}
+
+uint64_t CO64::GetChunkOffset(size_t index) const {
+  return this->impl->_chunk_offset_table[index];
+}
+
+CO64::IMPL::IMPL() {}
+
+CO64::IMPL::IMPL(const IMPL& o) {
+  this->_chunk_offset_table = o._chunk_offset_table;
+}
+
+CO64::IMPL::~IMPL() {}
+}  // namespace ISOBMFF

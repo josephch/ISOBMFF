@@ -31,38 +31,35 @@
 #ifndef ISOBMFF_CO64_HPP
 #define ISOBMFF_CO64_HPP
 
-#include <memory>
-#include <Macros.hpp>
 #include <FullBox.hpp>
+#include <Macros.hpp>
+#include <memory>
 #include <string>
 
-namespace ISOBMFF
-{
-    class ISOBMFF_EXPORT CO64: public FullBox
-    {
-        public:
+namespace ISOBMFF {
+class ISOBMFF_EXPORT CO64 : public FullBox {
+ public:
+  CO64();
+  CO64(const CO64& o);
+  CO64(CO64&& o) noexcept;
+  virtual ~CO64() override;
 
-            CO64();
-            CO64( const CO64 & o );
-            CO64( CO64 && o ) noexcept;
-            virtual ~CO64() override;
+  CO64& operator=(CO64 o);
 
-            CO64 & operator =( CO64 o );
+  Error ReadData(Parser& parser, BinaryStream& stream) override;
+  std::vector<std::pair<std::string, std::string> > GetDisplayableProperties()
+      const override;
 
-            Error                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+  size_t GetEntryCount() const;
+  uint64_t GetChunkOffset(size_t index) const;
 
-            size_t   GetEntryCount()                 const;
-            uint64_t GetChunkOffset(  size_t index ) const;
+  ISOBMFF_EXPORT friend void swap(CO64& o1, CO64& o2);
 
-            ISOBMFF_EXPORT friend void swap( CO64 & o1, CO64 & o2 );
+ private:
+  class IMPL;
 
-        private:
-
-            class IMPL;
-
-            std::unique_ptr< IMPL > impl;
-    };
-}
+  std::unique_ptr<IMPL> impl;
+};
+}  // namespace ISOBMFF
 
 #endif /* ISOBMFF_CO64_HPP */

@@ -31,48 +31,47 @@
 #ifndef ISOBMFF_STSC_HPP
 #define ISOBMFF_STSC_HPP
 
-#include <memory>
-#include <Macros.hpp>
 #include <FullBox.hpp>
+#include <Macros.hpp>
+#include <memory>
 #include <string>
 
-namespace ISOBMFF
-{
-    struct SampleToChunk
-    {
-        uint32_t firstChunk;
-        uint32_t samplesPerChunk;
-        uint32_t sampleDescriptionId;
+namespace ISOBMFF {
+struct SampleToChunk {
+  uint32_t firstChunk;
+  uint32_t samplesPerChunk;
+  uint32_t sampleDescriptionId;
 
-        SampleToChunk(uint32_t firstChunk, uint32_t samplesPerChunk, uint32_t sampleDescriptionId) :  firstChunk(firstChunk), samplesPerChunk(samplesPerChunk), sampleDescriptionId(sampleDescriptionId){}
+  SampleToChunk(uint32_t firstChunk, uint32_t samplesPerChunk,
+                uint32_t sampleDescriptionId)
+      : firstChunk(firstChunk),
+        samplesPerChunk(samplesPerChunk),
+        sampleDescriptionId(sampleDescriptionId) {}
+};
 
-    };
+class ISOBMFF_EXPORT STSC : public FullBox {
+ public:
+  STSC();
+  STSC(const STSC& o);
+  STSC(STSC&& o) noexcept;
+  virtual ~STSC() override;
 
-    class ISOBMFF_EXPORT STSC: public FullBox
-    {
-        public:
+  STSC& operator=(STSC o);
 
-            STSC();
-            STSC( const STSC & o );
-            STSC( STSC && o ) noexcept;
-            virtual ~STSC() override;
+  Error ReadData(Parser& parser, BinaryStream& stream) override;
+  std::vector<std::pair<std::string, std::string> > GetDisplayableProperties()
+      const override;
 
-            STSC & operator =( STSC o );
+  size_t GetEntryCount() const;
+  SampleToChunk GetSampleToChunk(size_t index) const;
 
-            Error                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+  ISOBMFF_EXPORT friend void swap(STSC& o1, STSC& o2);
 
-            size_t   GetEntryCount()                 const;
-            SampleToChunk GetSampleToChunk(  size_t index ) const;
+ private:
+  class IMPL;
 
-            ISOBMFF_EXPORT friend void swap( STSC & o1, STSC & o2 );
-
-        private:
-
-            class IMPL;
-
-            std::unique_ptr< IMPL > impl;
-    };
-}
+  std::unique_ptr<IMPL> impl;
+};
+}  // namespace ISOBMFF
 
 #endif /* ISOBMFF_STSC_HPP */

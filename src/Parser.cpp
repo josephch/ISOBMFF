@@ -34,8 +34,8 @@
 #include <AVCC.hpp>
 #include <BinaryDataStream.hpp>
 #include <BinaryFileStream.hpp>
-#include <CO64.hpp>
 #include <CDSC.hpp>
+#include <CO64.hpp>
 #include <COLR.hpp>
 #include <CTTS.hpp>
 #include <ContainerBox.hpp>
@@ -65,10 +65,10 @@
 #include <Parser.hpp>
 #include <SCHM.hpp>
 #include <STCO.hpp>
+#include <STSC.hpp>
 #include <STSD.hpp>
 #include <STSS.hpp>
 #include <STTS.hpp>
-#include <STSC.hpp>
 #include <THMB.hpp>
 #include <TKHD.hpp>
 #include <URL.hpp>

@@ -31,38 +31,35 @@
 #ifndef ISOBMFF_STCO_HPP
 #define ISOBMFF_STCO_HPP
 
-#include <memory>
-#include <Macros.hpp>
 #include <FullBox.hpp>
+#include <Macros.hpp>
+#include <memory>
 #include <string>
 
-namespace ISOBMFF
-{
-    class ISOBMFF_EXPORT STCO: public FullBox
-    {
-        public:
+namespace ISOBMFF {
+class ISOBMFF_EXPORT STCO : public FullBox {
+ public:
+  STCO();
+  STCO(const STCO& o);
+  STCO(STCO&& o) noexcept;
+  virtual ~STCO() override;
 
-            STCO();
-            STCO( const STCO & o );
-            STCO( STCO && o ) noexcept;
-            virtual ~STCO() override;
+  STCO& operator=(STCO o);
 
-            STCO & operator =( STCO o );
+  Error ReadData(Parser& parser, BinaryStream& stream) override;
+  std::vector<std::pair<std::string, std::string> > GetDisplayableProperties()
+      const override;
 
-            Error                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+  size_t GetEntryCount() const;
+  uint32_t GetChunkOffset(size_t index) const;
 
-            size_t   GetEntryCount()                 const;
-            uint32_t GetChunkOffset(  size_t index ) const;
+  ISOBMFF_EXPORT friend void swap(STCO& o1, STCO& o2);
 
-            ISOBMFF_EXPORT friend void swap( STCO & o1, STCO & o2 );
+ private:
+  class IMPL;
 
-        private:
-
-            class IMPL;
-
-            std::unique_ptr< IMPL > impl;
-    };
-}
+  std::unique_ptr<IMPL> impl;
+};
+}  // namespace ISOBMFF
 
 #endif /* ISOBMFF_STCO_HPP */
