@@ -28,8 +28,8 @@
  * @author      Jean-David Gadina - www.digidna.net
  */
 
-#include <ISOBMFF/STSC.hpp>
-#include <ISOBMFF/Parser.hpp>
+#include <STSC.hpp>
+#include <Parser.hpp>
 #include <cstdint>
 #include <cstring>
 
@@ -82,16 +82,27 @@ namespace ISOBMFF
         swap( o1.impl, o2.impl );
     }
 
-    void STSC::ReadData( Parser & parser, BinaryStream & stream )
+    Error STSC::ReadData( Parser & parser, BinaryStream & stream )
     {
         FullBox::ReadData( parser, stream );
+        uint32_t entry_count;
 
-        uint32_t entry_count = stream.ReadBigEndianUInt32();
+        Error err = stream.ReadBigEndianUInt32(entry_count);
+        if (err) return err;
 
         for( uint32_t i = 0; i < entry_count; i++ )
         {
-            this->impl->_sample_to_chunk_table.emplace_back(stream.ReadBigEndianUInt32(), stream.ReadBigEndianUInt32(), stream.ReadBigEndianUInt32());
+
+            uint32_t firstChunk, samplesPerChunk, sampleDescriptionId;
+            err = stream.ReadBigEndianUInt32(firstChunk);
+            if (err) return err;
+            err = stream.ReadBigEndianUInt32(samplesPerChunk);
+            if (err) return err;
+            err = stream.ReadBigEndianUInt32(sampleDescriptionId);
+            if (err) return err;
+            this->impl->_sample_to_chunk_table.emplace_back(firstChunk, samplesPerChunk, sampleDescriptionId);
         }
+        return err;
     }
 
     std::vector< std::pair< std::string, std::string > > STSC::GetDisplayableProperties() const

@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include "ISOBMFF/FTYP.hpp"
-#include "ISOBMFF/HDLR.hpp"
-#include "ISOBMFF/MVHD.hpp"
-#include "ISOBMFF/Parser.hpp"
-#include "ISOBMFF/STSC.hpp"
-#include "ISOBMFF/TKHD.hpp"
+#include "FTYP.hpp"
+#include "HDLR.hpp"
+#include "MVHD.hpp"
+#include "Parser.hpp"
+#include "STSC.hpp"
+#include "TKHD.hpp"
 
 static void processMinf(ISOBMFF::Container *minf)
 {
@@ -152,7 +152,7 @@ int main(int argc, char *argv[])
 {
     if (argc < 2)
     {
-        std::cerr << "Usage %s <isobmff file path>\n";
+        std::cerr << "Usage <isobmff file path>\n";
         return -1;
     }
     if (!parseFile(argv[1]))

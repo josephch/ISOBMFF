@@ -32,8 +32,8 @@
 #define ISOBMFF_STSC_HPP
 
 #include <memory>
-#include <ISOBMFF/Macros.hpp>
-#include <ISOBMFF/FullBox.hpp>
+#include <Macros.hpp>
+#include <FullBox.hpp>
 #include <string>
 
 namespace ISOBMFF
@@ -43,9 +43,9 @@ namespace ISOBMFF
         uint32_t firstChunk;
         uint32_t samplesPerChunk;
         uint32_t sampleDescriptionId;
-        
+
         SampleToChunk(uint32_t firstChunk, uint32_t samplesPerChunk, uint32_t sampleDescriptionId) :  firstChunk(firstChunk), samplesPerChunk(samplesPerChunk), sampleDescriptionId(sampleDescriptionId){}
-        
+
     };
 
     class ISOBMFF_EXPORT STSC: public FullBox
@@ -59,7 +59,7 @@ namespace ISOBMFF
 
             STSC & operator =( STSC o );
 
-            void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
+            Error                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
 
             size_t   GetEntryCount()                 const;
