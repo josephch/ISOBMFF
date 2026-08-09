@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="iso-bmff-tools" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ISOBMFF" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="include" />
+		</Compiler>
+		<Unit filename="include/AVC1.hpp" />
+		<Unit filename="include/AVCC.hpp" />
+		<Unit filename="include/BinaryDataStream.hpp" />
+		<Unit filename="include/BinaryFileStream.hpp" />
+		<Unit filename="include/BinaryStream.hpp" />
+		<Unit filename="include/Box.hpp" />
+		<Unit filename="include/CDSC.hpp" />
+		<Unit filename="include/CO64.hpp" />
+		<Unit filename="include/COLR.hpp" />
+		<Unit filename="include/Casts.hpp" />
+		<Unit filename="include/Container.hpp" />
+		<Unit filename="include/ContainerBox.hpp" />
+		<Unit filename="include/DIMG.hpp" />
+		<Unit filename="include/DREF.hpp" />
+		<Unit filename="include/DisplayableObject.hpp" />
+		<Unit filename="include/DisplayableObjectContainer.hpp" />
+		<Unit filename="include/FRMA.hpp" />
+		<Unit filename="include/FTYP.hpp" />
+		<Unit filename="include/File.hpp" />
+		<Unit filename="include/FullBox.hpp" />
+		<Unit filename="include/HDLR.hpp" />
+		<Unit filename="include/HVC1.hpp" />
+		<Unit filename="include/HVCC.hpp" />
+		<Unit filename="include/IINF.hpp" />
+		<Unit filename="include/ILOC.hpp" />
+		<Unit filename="include/INFE.hpp" />
+		<Unit filename="include/IPCO.hpp" />
+		<Unit filename="include/IPMA.hpp" />
+		<Unit filename="include/IREF.hpp" />
+		<Unit filename="include/IROT.hpp" />
+		<Unit filename="include/ISOBMFF.hpp" />
+		<Unit filename="include/ISPE.hpp" />
+		<Unit filename="include/ImageGrid.hpp" />
+		<Unit filename="include/MDHD.hpp" />
+		<Unit filename="include/META.hpp" />
+		<Unit filename="include/MVHD.hpp" />
+		<Unit filename="include/Macros.hpp" />
+		<Unit filename="include/Matrix.hpp" />
+		<Unit filename="include/PITM.hpp" />
+		<Unit filename="include/PIXI.hpp" />
+		<Unit filename="include/Parser.hpp" />
+		<Unit filename="include/SCHM.hpp" />
+		<Unit filename="include/STCO.hpp" />
+		<Unit filename="include/STSC.hpp" />
+		<Unit filename="include/STSD.hpp" />
+		<Unit filename="include/STSS.hpp" />
+		<Unit filename="include/STTS.hpp" />
+		<Unit filename="include/SingleItemTypeReferenceBox.hpp" />
+		<Unit filename="include/THMB.hpp" />
+		<Unit filename="include/TKHD.hpp" />
+		<Unit filename="include/URL.hpp" />
+		<Unit filename="include/URN.hpp" />
+		<Unit filename="include/Utils.hpp" />
+		<Unit filename="include/WIN32.hpp" />
+		<Unit filename="src/AV01.cpp" />
+		<Unit filename="src/AVC1.cpp" />
+		<Unit filename="src/AVC3.cpp" />
+		<Unit filename="src/AVCC-NALUnit.cpp" />
+		<Unit filename="src/AVCC.cpp" />
+		<Unit filename="src/BinaryDataStream.cpp" />
+		<Unit filename="src/BinaryFileStream.cpp" />
+		<Unit filename="src/BinaryStream.cpp" />
+		<Unit filename="src/Box.cpp" />
+		<Unit filename="src/CDSC.cpp" />
+		<Unit filename="src/CO64.cpp" />
+		<Unit filename="src/COLR.cpp" />
+		<Unit filename="src/CTTS.cpp" />
+		<Unit filename="src/Container.cpp" />
+		<Unit filename="src/ContainerBox.cpp" />
+		<Unit filename="src/DIMG.cpp" />
+		<Unit filename="src/DREF.cpp" />
+		<Unit filename="src/DisplayableObject.cpp" />
+		<Unit filename="src/DisplayableObjectContainer.cpp" />
+		<Unit filename="src/ELST.cpp" />
+		<Unit filename="src/FRMA.cpp" />
+		<Unit filename="src/FTYP.cpp" />
+		<Unit filename="src/File.cpp" />
+		<Unit filename="src/FullBox.cpp" />
+		<Unit filename="src/HDLR.cpp" />
+		<Unit filename="src/HEV1.cpp" />
+		<Unit filename="src/HVC1.cpp" />
+		<Unit filename="src/HVCC-Array-NALUnit.cpp" />
+		<Unit filename="src/HVCC-Array.cpp" />
+		<Unit filename="src/HVCC.cpp" />
+		<Unit filename="src/IINF.cpp" />
+		<Unit filename="src/ILOC-Item-Extent.cpp" />
+		<Unit filename="src/ILOC-Item.cpp" />
+		<Unit filename="src/ILOC.cpp" />
+		<Unit filename="src/INFE.cpp" />
+		<Unit filename="src/IPCO.cpp" />
+		<Unit filename="src/IPMA-Entry-Association.cpp" />
+		<Unit filename="src/IPMA-Entry.cpp" />
+		<Unit filename="src/IPMA.cpp" />
+		<Unit filename="src/IREF.cpp" />
+		<Unit filename="src/IROT.cpp" />
+		<Unit filename="src/ISPE.cpp" />
+		<Unit filename="src/ImageGrid.cpp" />
+		<Unit filename="src/MDHD.cpp" />
+		<Unit filename="src/META.cpp" />
+		<Unit filename="src/MP4A.cpp" />
+		<Unit filename="src/MVHD.cpp" />
+		<Unit filename="src/Matrix.cpp" />
+		<Unit filename="src/PITM.cpp" />
+		<Unit filename="src/PIXI-Channel.cpp" />
+		<Unit filename="src/PIXI.cpp" />
+		<Unit filename="src/Parser.cpp" />
+		<Unit filename="src/SCHM.cpp" />
+		<Unit filename="src/STCO.cpp" />
+		<Unit filename="src/STSC.cpp" />
+		<Unit filename="src/STSD.cpp" />
+		<Unit filename="src/STSS.cpp" />
+		<Unit filename="src/STTS.cpp" />
+		<Unit filename="src/SingleItemTypeReferenceBox.cpp" />
+		<Unit filename="src/THMB.cpp" />
+		<Unit filename="src/TKHD.cpp" />
+		<Unit filename="src/URL.cpp" />
+		<Unit filename="src/URN.cpp" />
+		<Unit filename="src/Utils.cpp" />
+		<Unit filename="src/WIN32.cpp" />
+		<Unit filename="tools/main.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
