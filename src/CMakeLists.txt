@@ -46,6 +46,7 @@ add_library(isobmff
     IREF.cpp
     IROT.cpp
     ISPE.cpp
+    LoudnessBaseBox.cpp
     Matrix.cpp
     MDHD.cpp
     META.cpp
@@ -64,6 +65,7 @@ add_library(isobmff
     STTS.cpp
     THMB.cpp
     TKHD.cpp
+    TLOU.cpp
     URL.cpp
     URN.cpp
     Utils.cpp
