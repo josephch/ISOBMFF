@@ -23,72 +23,55 @@
  ******************************************************************************/
 
 /*!
- * @header      ISOBMFF.hpp
+ * @header      STSC.hpp
  * @copyright   (c) 2017, DigiDNA - www.digidna.net
  * @author      Jean-David Gadina - www.digidna.net
  */
 
-#ifndef ISOBMFF_HPP
-#define ISOBMFF_HPP
+#ifndef ISOBMFF_STSC_HPP
+#define ISOBMFF_STSC_HPP
 
-#include <AV01.hpp>
-#include <AVC1.hpp>
-#include <AVC3.hpp>
-#include <AVCC.hpp>
-#include <BinaryDataStream.hpp>
-#include <BinaryFileStream.hpp>
-#include <BinaryStream.hpp>
-#include <Box.hpp>
-#include <CDSC.hpp>
-#include <COLR.hpp>
-#include <CTTS.hpp>
-#include <Container.hpp>
-#include <ContainerBox.hpp>
-#include <DIMG.hpp>
-#include <DREF.hpp>
-#include <DisplayableObject.hpp>
-#include <DisplayableObjectContainer.hpp>
-#include <ELST.hpp>
-#include <FRMA.hpp>
-#include <FTYP.hpp>
-#include <File.hpp>
 #include <FullBox.hpp>
-#include <HDLR.hpp>
-#include <HEV1.hpp>
-#include <HVC1.hpp>
-#include <HVCC.hpp>
-#include <IINF.hpp>
-#include <ILOC.hpp>
-#include <INFE.hpp>
-#include <IPCO.hpp>
-#include <IPMA.hpp>
-#include <IREF.hpp>
-#include <IROT.hpp>
-#include <ISPE.hpp>
-#include <ImageGrid.hpp>
-#include <MDHD.hpp>
-#include <META.hpp>
-#include <MP4A.hpp>
-#include <MVHD.hpp>
 #include <Macros.hpp>
-#include <Matrix.hpp>
-#include <PITM.hpp>
-#include <PIXI.hpp>
-#include <Parser.hpp>
-#include <SCHM.hpp>
-#include <STSC.hpp>
-#include <STSD.hpp>
-#include <STSS.hpp>
-#include <STTS.hpp>
-#include <SingleItemTypeReferenceBox.hpp>
-#include <THMB.hpp>
-#include <TKHD.hpp>
-#include <URL.hpp>
-#include <URN.hpp>
-#include <Utils.hpp>
+#include <memory>
+#include <string>
 
-#ifdef _WIN32
-#include <WIN32.hpp>
-#endif
+namespace ISOBMFF {
+struct SampleToChunk {
+  uint32_t firstChunk;
+  uint32_t samplesPerChunk;
+  uint32_t sampleDescriptionId;
 
-#endif /* ISOBMFF_HPP */
+  SampleToChunk(uint32_t firstChunk, uint32_t samplesPerChunk,
+                uint32_t sampleDescriptionId)
+      : firstChunk(firstChunk),
+        samplesPerChunk(samplesPerChunk),
+        sampleDescriptionId(sampleDescriptionId) {}
+};
+
+class ISOBMFF_EXPORT STSC : public FullBox {
+ public:
+  STSC();
+  STSC(const STSC& o);
+  STSC(STSC&& o) noexcept;
+  virtual ~STSC() override;
+
+  STSC& operator=(STSC o);
+
+  Error ReadData(Parser& parser, BinaryStream& stream) override;
+  std::vector<std::pair<std::string, std::string> > GetDisplayableProperties()
+      const override;
+
+  size_t GetEntryCount() const;
+  SampleToChunk GetSampleToChunk(size_t index) const;
+
+  ISOBMFF_EXPORT friend void swap(STSC& o1, STSC& o2);
+
+ private:
+  class IMPL;
+
+  std::unique_ptr<IMPL> impl;
+};
+}  // namespace ISOBMFF
+
+#endif /* ISOBMFF_STSC_HPP */

@@ -12,6 +12,7 @@ add_library(isobmff
     BinaryStream.cpp
     Box.cpp
     CDSC.cpp
+    CO64.cpp
     COLR.cpp
     config.h.in
     Container.cpp
@@ -56,6 +57,8 @@ add_library(isobmff
     PIXI.cpp
     SCHM.cpp
     SingleItemTypeReferenceBox.cpp
+    STCO.cpp
+    STSC.cpp
     STSD.cpp
     STSS.cpp
     STTS.cpp
