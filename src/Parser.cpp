@@ -71,6 +71,7 @@
 #include <STTS.hpp>
 #include <THMB.hpp>
 #include <TKHD.hpp>
+#include <TLOU.hpp>
 #include <URL.hpp>
 #include <URN.hpp>
 #include <cstring>
@@ -298,6 +299,8 @@ void Parser::IMPL::RegisterDefaultBoxes() {
   this->RegisterContainerBox("strk");
   this->RegisterContainerBox("tapt");
   this->RegisterContainerBox("schi");
+  this->RegisterContainerBox("udta");
+  this->RegisterContainerBox("ludt");
 
   this->RegisterBox("ftyp", [=]() -> std::shared_ptr<Box> {
     return std::make_shared<FTYP>();
@@ -421,6 +424,9 @@ void Parser::IMPL::RegisterDefaultBoxes() {
   });
   this->RegisterBox("co64", [=]() -> std::shared_ptr<Box> {
     return std::make_shared<CO64>();
+  });
+  this->RegisterBox("tlou", [=]() -> std::shared_ptr<Box> {
+    return std::make_shared<TLOU>();
   });
 }
 }  // namespace ISOBMFF
