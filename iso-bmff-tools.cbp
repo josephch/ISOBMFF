@@ -54,6 +54,7 @@
 		<Unit filename="include/ISOBMFF.hpp" />
 		<Unit filename="include/ISPE.hpp" />
 		<Unit filename="include/ImageGrid.hpp" />
+		<Unit filename="include/LoudnessBaseBox.hpp" />
 		<Unit filename="include/MDHD.hpp" />
 		<Unit filename="include/META.hpp" />
 		<Unit filename="include/MVHD.hpp" />
@@ -118,6 +119,7 @@
 		<Unit filename="src/IROT.cpp" />
 		<Unit filename="src/ISPE.cpp" />
 		<Unit filename="src/ImageGrid.cpp" />
+		<Unit filename="src/LoudnessBaseBox.cpp" />
 		<Unit filename="src/MDHD.cpp" />
 		<Unit filename="src/META.cpp" />
 		<Unit filename="src/MP4A.cpp" />
@@ -136,6 +138,7 @@
 		<Unit filename="src/SingleItemTypeReferenceBox.cpp" />
 		<Unit filename="src/THMB.cpp" />
 		<Unit filename="src/TKHD.cpp" />
+		<Unit filename="src/TLOU.cpp" />
 		<Unit filename="src/URL.cpp" />
 		<Unit filename="src/URN.cpp" />
 		<Unit filename="src/Utils.cpp" />
